@@ -1,0 +1,53 @@
+@font-face {
+  src: url(./css/CirceRounded-Regular.woff) format('woff');
+  font-family: "CirceRoundedRegular2";
+  font-style: normal;
+}
+
+body {
+  font-family: 'circle', sans-serif;
+  color: #fda213;
+  font-size: 125px;
+  margin: 0;
+  width: 3508px;
+  height: 2480px;
+  padding: 0;
+}
+
+#svg_image {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  width: 3508px;
+  height: 2480px;
+}
+
+#image {
+  position: absolute;
+  width: 3508px;
+  height: 2480px;
+  z-index: -1;
+}
+
+#container_text {
+  justify-content: end;
+  margin-right: 220px;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  margin-bottom: 300px;
+}
+
+#svg_text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 170px;
+  z-index: 10;
+  color: #fcea28;
+  font-weight: bold;
+  font-family: 'CirceRoundedRegular2', sans-serif;
+}
