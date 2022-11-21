@@ -1,10 +1,10 @@
 import { PresentPage } from "./Components/PresentPage";
 
-import style from './css/index.module.css';
+// import style from './css/index.module.css';
 
 function App() {
   return (
-    <div className={style.container}>
+    <div >
       first page
       <PresentPage/>
     </div>
