@@ -4,18 +4,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfo } from '@fortawesome/free-solid-svg-icons';
 
 import styles from '../../css/index.module.css';
-import { EDIT_DRAG_IMAGE, IMAGE_ONLOAD } from "../../state/types";
+import { EDIT_DRAG_IMAGE, EDIT_TEXTAREA_FIELD, IMAGE_ONLOAD } from "../../state/types";
 
 interface IProps {
   handlerShowWindows: () => void;
   dispatch: React.Dispatch<any>
   drag: boolean;
   image: string;
+  text: string;
 }
 
 export const PresentPage: React.FC<IProps> = ({
                                                 image,
                                                 dispatch,
+                                                text,
                                                 drag,
                                                 handlerShowWindows,
                                               }) => {
@@ -30,6 +32,11 @@ export const PresentPage: React.FC<IProps> = ({
     e.preventDefault();
 
     return dispatch({type: EDIT_DRAG_IMAGE, payload: false})
+  }
+  const handlerChangeTextArea = (e: any) => {
+    e.preventDefault();
+
+    return dispatch({type: EDIT_TEXTAREA_FIELD, payload: e.target.value})
   }
 
   const onDropHandler = (e: any) => {
@@ -54,6 +61,10 @@ export const PresentPage: React.FC<IProps> = ({
         <FontAwesomeIcon icon={faInfo}/>
       </div>
       <div className={styles.line}/>
+      <div className={styles.textareaContainer}>
+        <textarea value={text} onChange={handlerChangeTextArea} placeholder={'Напривер: Иван Иванов, Петр Петров...'} className={styles.textareaField}/>
+      </div>
+
       {image !== '' ?
         <div className={styles.containerImage}>
           <img className={styles.image} src={image} alt="фон"/>
