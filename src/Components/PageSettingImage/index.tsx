@@ -9,14 +9,21 @@ interface IProps {
 }
 
 export const PageSettingImage: React.FC<IProps> = ({state, dispatch}) => {
-  const student = ','+ state.text;
+  const student = ',' + state.text;
+  let interval:any = null;
 
+  const clearIntervals = (interval:any)=>{
+    clearInterval(interval)
+  }
   const studentArray = student.split(',');
   const downloadFile = () => {
     let i = 0;
     const download = () => {
       const svg = document.getElementById("svg_image");
       const svgText = document.getElementById("svg_text");
+      if (i === studentArray.length) {
+        clearIntervals(interval)
+      }
       // @ts-ignore
       svgText.innerHTML = studentArray[i];
       console.log('download')
@@ -34,7 +41,7 @@ export const PageSettingImage: React.FC<IProps> = ({state, dispatch}) => {
         i++
       });
     }
-    setInterval(download, 5000)
+    interval = setInterval(download, 5000);
   }
   return (
     <div
@@ -75,7 +82,7 @@ export const PageSettingImage: React.FC<IProps> = ({state, dispatch}) => {
               fontSize: `${state.fontSize}px`,
             }}
           >
-            {studentArray[0]}
+            {studentArray[1]}
           </div>
         </div>
       </div>
