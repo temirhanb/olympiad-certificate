@@ -176,3 +176,7 @@ code {
   min-height: 5vh;
   font-size:large;
 }
+
+.inputFile{
+  display: none;
+}

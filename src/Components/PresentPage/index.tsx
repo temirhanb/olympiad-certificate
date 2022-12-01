@@ -5,6 +5,7 @@ import { faInfo } from '@fortawesome/free-solid-svg-icons';
 
 import styles from '../../css/index.module.css';
 import { EDIT_DRAG_IMAGE, EDIT_TEXTAREA_FIELD, IMAGE_ONLOAD } from "../../state/types";
+import { useRef } from "react";
 
 interface IProps {
   handlerShowWindows: () => void;
@@ -21,6 +22,8 @@ export const PresentPage: React.FC<IProps> = ({
                                                 drag,
                                                 handlerShowWindows,
                                               }) => {
+
+  const refInput = useRef(null)
 
   const handlerDragStart = (e: any) => {
     e.preventDefault();
@@ -41,10 +44,11 @@ export const PresentPage: React.FC<IProps> = ({
 
   const onDropHandler = (e: any) => {
     e.preventDefault();
+
     let file = [...e.dataTransfer.files]
+
     file.forEach(item => {
       const image = new FileReader()
-      console.log(item)
       image.readAsDataURL(item);
       image.onload = (ev: any) => {
 
@@ -53,8 +57,29 @@ export const PresentPage: React.FC<IProps> = ({
         return dispatch({type: IMAGE_ONLOAD, payload: src})
       }
     })
-
   }
+
+  const handlerInputFile = (e: any) => {
+    e.preventDefault();
+
+    let file = [...e.target.files]
+
+    file.forEach(item => {
+      const image = new FileReader()
+      image.readAsDataURL(item);
+      image.onload = (ev: any) => {
+
+        const src = ev.target.result;
+
+        return dispatch({type: IMAGE_ONLOAD, payload: src})
+      }
+    })
+  }
+  const clickHandlerInput = ()=>{
+    // @ts-ignore
+    refInput.current.click();
+  }
+
   return (
     <div className={styles.containerPresent}>
       <div onClick={handlerShowWindows} className={styles.imageInfo}>
@@ -64,7 +89,7 @@ export const PresentPage: React.FC<IProps> = ({
       <div className={styles.textareaContainer}>
         <textarea value={text} onChange={handlerChangeTextArea} placeholder={'Напривер: Иван Иванов, Петр Петров...'} className={styles.textareaField}/>
       </div>
-
+      <input className={styles.inputFile} ref={refInput} type="file" onChange={handlerInputFile}/>
       {image !== '' ?
         <div className={styles.containerImage}>
           <img className={styles.image} src={image} alt="фон"/>
@@ -75,6 +100,7 @@ export const PresentPage: React.FC<IProps> = ({
           onDrop={onDropHandler}
           onDragOver={handlerDragStart}
           className={styles.containerDragImage}
+          onClick={clickHandlerInput}
         >
 
           {drag ?
