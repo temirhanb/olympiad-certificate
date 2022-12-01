@@ -9,31 +9,32 @@ interface IProps {
 }
 
 export const PageSettingImage: React.FC<IProps> = ({state, dispatch}) => {
-  const student = state.text;
+  const student = ','+ state.text;
 
   const studentArray = student.split(',');
   const downloadFile = () => {
+    let i = 0;
+    const download = () => {
+      const svg = document.getElementById("svg_image");
+      const svgText = document.getElementById("svg_text");
+      // @ts-ignore
+      svgText.innerHTML = studentArray[i];
+      console.log('download')
+      // @ts-ignore
+      html2canvas(svg, {width: state.widthImage, height: state.heightImage, x: 0}).then(function (canvas) {
 
-    for (const item in studentArray) {
-      setTimeout(function () {
-        const svg = document.getElementById("svg_image");
-        const svgText = document.getElementById("svg_text");
+        const link = document.createElement("a");
+        document.body.appendChild(link);
         // @ts-ignore
-        svgText.innerHTML = studentArray[item];
-        // @ts-ignore
-        html2canvas(svg, {width: state.widthImage, height: state.heightImage, x: 0}).then(function (canvas) {
-
-          const link = document.createElement("a");
-          document.body.appendChild(link);
-          // @ts-ignore
-          link.download = svgText.innerHTML + ".png";
-          link.href = canvas.toDataURL();
-          link.target = '_blank';
-          link.click();
-          document.body.removeChild(link);
-        });
-      }, Number(item) * 5000, item);
+        link.download = svgText.innerHTML + ".png";
+        link.href = canvas.toDataURL();
+        link.target = '_blank';
+        link.click();
+        document.body.removeChild(link);
+        i++
+      });
     }
+    setInterval(download, 5000)
   }
   return (
     <div
