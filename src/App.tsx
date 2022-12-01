@@ -29,7 +29,6 @@ const App: React.FC = () => {
     };
     img.src = state.image;
   }, [state.image])
-  console.log(state)
 
   return (
     <div className={styles.container}>

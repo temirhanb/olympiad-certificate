@@ -22,7 +22,7 @@ export const initialState: IInitialState = {
   topText: 30,
   fontSize: 150,
   heightImage: 0,
-  text: 'Иван Иванов, петр петров'
+  text: ''
 };
 
 
