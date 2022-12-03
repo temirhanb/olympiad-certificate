@@ -5,7 +5,7 @@ import { IInitialState, SET_COLOR_TEXT, SET_LEFT_TEXT, SET_TEXT_SIZE, SET_TOP_TE
 interface IProps {
   state: IInitialState;
   dispatch: React.Dispatch<any>;
-  downloadFile: () => void;
+  downloadFile: (index: number) => void;
 }
 
 export const WindowsSetting: React.FC<IProps> = (
@@ -19,18 +19,34 @@ export const WindowsSetting: React.FC<IProps> = (
     e.preventDefault();
     return dispatch({type: SET_LEFT_TEXT, payload: Number(e.target.value)})
   }
+
   const handlerInputTop = (e: any) => {
     e.preventDefault();
     return dispatch({type: SET_TOP_TEXT, payload: Number(e.target.value)})
   }
+
   const handlerInputFontSize = (e: any) => {
     e.preventDefault();
     return dispatch({type: SET_TEXT_SIZE, payload: Number(e.target.value)})
   }
+
   const handlerInputColor = (e: any) => {
     e.preventDefault();
     return dispatch({type: SET_COLOR_TEXT, payload: e.target.value})
   }
+
+  const handlerStartDownload = () => {
+    let index: number = 0;
+    const student = ',' + state.text;
+
+    const studentArray = student.split(',');
+    const interval = setInterval(() => {
+      downloadFile(index)
+      index++
+    }, 10000)
+    if (index >= (studentArray.length - 1)) clearInterval(interval)
+  }
+
   return (
     <div className={styles.containerWindowsSetting}>
       <div className={styles.windowsSettingHeader}>Настройки</div>
@@ -52,7 +68,7 @@ export const WindowsSetting: React.FC<IProps> = (
         <input className={styles.inputSetting} value={state.color} onChange={handlerInputColor} type="sting"/>
       </div>
       <div>
-        <button onClick={downloadFile}>Скачать</button>
+        <button onClick={handlerStartDownload}>Скачать</button>
       </div>
     </div>
   )

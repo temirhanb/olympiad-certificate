@@ -8,41 +8,37 @@ interface IProps {
   dispatch: React.Dispatch<any>;
 }
 
+const sleep = (time: number) => {
+  return new Promise((resolve) => setTimeout(resolve, Math.ceil(time * 1000)));
+};
+
 export const PageSettingImage: React.FC<IProps> = ({state, dispatch}) => {
+
   const student = ',' + state.text;
-  let interval:any = null;
-
-  const clearIntervals = (interval:any)=>{
-    clearInterval(interval)
-  }
   const studentArray = student.split(',');
-  const downloadFile = () => {
-    let i = 0;
-    const download = () => {
-      const svg = document.getElementById("svg_image");
-      const svgText = document.getElementById("svg_text");
-      if (i === studentArray.length) {
-        clearIntervals(interval)
-      }
-      // @ts-ignore
-      svgText.innerHTML = studentArray[i];
-      console.log('download')
-      // @ts-ignore
-      html2canvas(svg, {width: state.widthImage, height: state.heightImage, x: 0}).then(function (canvas) {
 
-        const link = document.createElement("a");
-        document.body.appendChild(link);
-        // @ts-ignore
-        link.download = svgText.innerHTML + ".png";
-        link.href = canvas.toDataURL();
-        link.target = '_blank';
-        link.click();
-        document.body.removeChild(link);
-        i++
-      });
-    }
-    interval = setInterval(download, 5000);
+  const downloadFile = async (index: number = 0) => {
+
+    const svg = document.getElementById("svg_image");
+    const svgText = document.getElementById("svg_text");
+    // @ts-ignore
+    svgText.innerHTML = studentArray[index];
+    // @ts-ignore
+    await html2canvas(svg, {width: state.widthImage, height: state.heightImage, x: 0}).then(function (canvas) {
+
+      const link = document.createElement("a");
+      document.body.appendChild(link);
+      // @ts-ignore
+      link.download = svgText.innerHTML + ".png";
+      link.href = canvas.toDataURL();
+      link.target = '_blank';
+      link.click();
+      document.body.removeChild(link);
+      sleep(4)
+    });
+    sleep(4)
   }
+
   return (
     <div
       style={{position: 'absolute', left: 0, top: 0}}
