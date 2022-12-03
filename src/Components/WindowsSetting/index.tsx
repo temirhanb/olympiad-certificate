@@ -5,7 +5,7 @@ import { IInitialState, SET_COLOR_TEXT, SET_LEFT_TEXT, SET_TEXT_SIZE, SET_TOP_TE
 interface IProps {
   state: IInitialState;
   dispatch: React.Dispatch<any>;
-  downloadFile: (index: number) => void;
+  downloadFile: () => void;
 }
 
 export const WindowsSetting: React.FC<IProps> = (
@@ -36,17 +36,10 @@ export const WindowsSetting: React.FC<IProps> = (
     return dispatch({type: SET_COLOR_TEXT, payload: e.target.value})
   }
 
-  const handlerStartDownload = () => {
+  const handlerStartDownload = async () => {
     setPreloader(true)
-    let index: number = 0;
-    const student = ',' + state.text;
 
-    const studentArray = student.split(',');
-    const interval = setInterval(() => {
-      downloadFile(index)
-      index++
-    }, 5000)
-    if (index >= (studentArray.length - 1)) clearInterval(interval)
+    downloadFile();
   }
 
   return (
