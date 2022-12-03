@@ -67,7 +67,7 @@ export const PageSettingImage: React.FC<IProps> = ({state, dispatch}) => {
         <div
           id="container_text"
           style={{
-            width: 100,
+            width: '100%',
             left: `${state.leftText}%`,
             top: `${state.topText}%`,
             display: "flex",
