@@ -34,9 +34,7 @@ export const PageSettingImage: React.FC<IProps> = ({state, dispatch}) => {
       link.target = '_blank';
       link.click();
       document.body.removeChild(link);
-      sleep(4)
     });
-    sleep(4)
   }
 
   return (

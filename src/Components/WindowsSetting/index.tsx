@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from '../../css/index.module.css';
 import { IInitialState, SET_COLOR_TEXT, SET_LEFT_TEXT, SET_TEXT_SIZE, SET_TOP_TEXT } from "../../state/types";
 
@@ -15,6 +15,7 @@ export const WindowsSetting: React.FC<IProps> = (
     downloadFile
   }) => {
 
+  const [preloader, setPreloader] = useState(false)
   const handlerInputLeft = (e: any) => {
     e.preventDefault();
     return dispatch({type: SET_LEFT_TEXT, payload: Number(e.target.value)})
@@ -36,6 +37,7 @@ export const WindowsSetting: React.FC<IProps> = (
   }
 
   const handlerStartDownload = () => {
+    setPreloader(true)
     let index: number = 0;
     const student = ',' + state.text;
 
@@ -43,7 +45,7 @@ export const WindowsSetting: React.FC<IProps> = (
     const interval = setInterval(() => {
       downloadFile(index)
       index++
-    }, 10000)
+    }, 5000)
     if (index >= (studentArray.length - 1)) clearInterval(interval)
   }
 
@@ -67,9 +69,13 @@ export const WindowsSetting: React.FC<IProps> = (
         <span>Цвет текста</span>
         <input className={styles.inputSetting} value={state.color} onChange={handlerInputColor} type="sting"/>
       </div>
-      <div>
-        <button onClick={handlerStartDownload}>Скачать</button>
-      </div>
+      {preloader ? (
+        <div className={styles.loader}>loading</div>
+      ) : (
+        <div>
+          <button onClick={handlerStartDownload}>Скачать</button>
+        </div>
+      )}
     </div>
   )
 }
