@@ -140,16 +140,10 @@ code {
 .containerWindowsSetting {
   display: flex;
   flex-direction: column;
-  width: 30%;
-  height: auto;
+  width: 100%;
+  height: 100%;
   z-index: 100;
-  position: fixed;
-  left: 5%;
-  top: 5%;
-  background: white;
   align-items: center;
-  border-radius: 20px;
-  padding: 20px 0;
 }
 
 .windowsSettingHeader {
@@ -174,15 +168,15 @@ code {
   width: 100%;
   height: auto;
   min-height: 5vh;
-  font-size:large;
+  font-size: large;
 }
 
-.inputFile{
+.inputFile {
   display: none;
 }
 
 .loader {
-  overflow:hidden;
+  overflow: hidden;
   font-size: 10px;
   margin: 50px auto;
   text-indent: -9999em;
@@ -190,11 +184,11 @@ code {
   height: 50px;
   border-radius: 50%;
   background: #65abf8;
-  background: -moz-linear-gradient(left, #65abf8 10%, rgba(101,171,248, 0) 42%);
-  background: -webkit-linear-gradient(left, #65abf8 10%, rgba(101,171,248, 0) 42%);
-  background: -o-linear-gradient(left, #65abf8 10%, rgba(101,171,248, 0) 42%);
-  background: -ms-linear-gradient(left, #65abf8 10%, rgba(101,171,248, 0) 42%);
-  background: linear-gradient(to right, #65abf8 10%, rgba(101,171,248, 0) 42%);
+  background: -moz-linear-gradient(left, #65abf8 10%, rgba(101, 171, 248, 0) 42%);
+  background: -webkit-linear-gradient(left, #65abf8 10%, rgba(101, 171, 248, 0) 42%);
+  background: -o-linear-gradient(left, #65abf8 10%, rgba(101, 171, 248, 0) 42%);
+  background: -ms-linear-gradient(left, #65abf8 10%, rgba(101, 171, 248, 0) 42%);
+  background: linear-gradient(to right, #65abf8 10%, rgba(101, 171, 248, 0) 42%);
   position: relative;
   -webkit-animation: load3 1.4s infinite linear;
   animation: load3 1.4s infinite linear;
@@ -202,6 +196,7 @@ code {
   -ms-transform: translateZ(0);
   transform: translateZ(0);
 }
+
 .loader:before {
   width: 50%;
   height: 50%;
@@ -212,6 +207,7 @@ code {
   left: 0;
   content: '';
 }
+
 .loader:after {
   background: white;
   width: 75%;
@@ -225,6 +221,7 @@ code {
   bottom: 0;
   right: 0;
 }
+
 @-webkit-keyframes load3 {
   0% {
     -webkit-transform: rotate(0deg);
@@ -235,6 +232,7 @@ code {
     transform: rotate(360deg);
   }
 }
+
 @keyframes load3 {
   0% {
     -webkit-transform: rotate(0deg);
@@ -244,4 +242,30 @@ code {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+}
+
+.hideWindows {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0;
+  left: 50%;
+  z-index: 101;
+  padding: 10px;
+}
+
+.containerWindowsParent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 5%;
+  top: 5%;
+  width: 18%;
+  flex-direction: column;
+  height: auto;
+  z-index: 100;
+  background: white;
+  border-radius: 20px;
+  padding: 20px 0;
 }

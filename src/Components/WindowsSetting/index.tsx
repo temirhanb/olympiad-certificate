@@ -16,6 +16,7 @@ export const WindowsSetting: React.FC<IProps> = (
   }) => {
 
   const [preloader, setPreloader] = useState(false)
+  const [hideWindows, setHideWindows] = useState(false)
   const handlerInputLeft = (e: any) => {
     e.preventDefault();
     return dispatch({type: SET_LEFT_TEXT, payload: Number(e.target.value)})
@@ -43,7 +44,8 @@ export const WindowsSetting: React.FC<IProps> = (
   }
 
   return (
-    <div className={styles.containerWindowsSetting}>
+    <div
+      className={styles.containerWindowsSetting}>
       <div className={styles.windowsSettingHeader}>Настройки</div>
       <div className={styles.line}/>
       <div className={styles.inputContainer}>

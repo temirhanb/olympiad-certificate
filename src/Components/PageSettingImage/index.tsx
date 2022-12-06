@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import html2canvas from "html2canvas";
 import { IInitialState } from "../../state/types";
 import { WindowsSetting } from "../WindowsSetting";
+import styles from "../../css/index.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 
 interface IProps {
   state: IInitialState;
@@ -33,16 +36,32 @@ export const PageSettingImage: React.FC<IProps> = ({state, dispatch}) => {
       });
     }
   }
+  const [hideWindows, setHideWindows] = useState(false)
+
+  const handlerHideButton = () => {
+    setHideWindows(!hideWindows)
+  }
 
   return (
     <div
       style={{position: 'absolute', left: 0, top: 0}}
     >
-      <WindowsSetting
-        state={state}
-        dispatch={dispatch}
-        downloadFile={downloadFile}
-      />
+      <div
+        className={styles.containerWindowsParent}
+      >
+        {hideWindows?(null):(
+          <WindowsSetting
+            state={state}
+            dispatch={dispatch}
+            downloadFile={downloadFile}
+          />
+        )}
+
+        <div onClick={handlerHideButton} className={styles.hideWindows}>
+          <FontAwesomeIcon icon={faArrowDown}/>
+        </div>
+      </div>
+
       <div
         style={{width: state.widthImage, height: state.heightImage, position: 'absolute'}}
         id="svg_image"
@@ -58,7 +77,7 @@ export const PageSettingImage: React.FC<IProps> = ({state, dispatch}) => {
         <div
           id="container_text"
           style={{
-            width: '100%',
+            width: 'auto',
             left: `${state.leftText}%`,
             top: `${state.topText}%`,
             display: "flex",
