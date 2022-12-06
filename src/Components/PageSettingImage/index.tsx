@@ -22,6 +22,11 @@ export const PageSettingImage: React.FC<IProps> = ({state, dispatch}) => {
       const svgText = document.getElementById("svg_text");
       // @ts-ignore
       svgText.innerHTML = studentArray[i];
+
+      if(i === studentArray.length -1){
+        alert('Скачивание завершено')
+      }
+
       // @ts-ignore
       await html2canvas(svg, {width: state.widthImage, height: state.heightImage, x: 0}).then(function (canvas) {
 
