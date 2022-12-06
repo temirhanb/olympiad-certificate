@@ -16,7 +16,6 @@ export const WindowsSetting: React.FC<IProps> = (
   }) => {
 
   const [preloader, setPreloader] = useState(false)
-  const [hideWindows, setHideWindows] = useState(false)
   const handlerInputLeft = (e: any) => {
     e.preventDefault();
     return dispatch({type: SET_LEFT_TEXT, payload: Number(e.target.value)})

@@ -87,7 +87,7 @@ export const PresentPage: React.FC<IProps> = ({
       </div>
       <div className={styles.line}/>
       <div className={styles.textareaContainer}>
-        <textarea value={text} onChange={handlerChangeTextArea} placeholder={'Напривер: Иван Иванов, Петр Петров...'} className={styles.textareaField}/>
+        <textarea maxLength={1000} value={text} onChange={handlerChangeTextArea} placeholder={'Напривер: Иван Иванов, Петр Петров...'} className={styles.textareaField}/>
       </div>
       <input className={styles.inputFile} ref={refInput} type="file" onChange={handlerInputFile}/>
       {image !== '' ?

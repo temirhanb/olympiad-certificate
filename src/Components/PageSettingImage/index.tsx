@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import html2canvas from "html2canvas";
 import { IInitialState } from "../../state/types";
 import { WindowsSetting } from "../WindowsSetting";
 import styles from "../../css/index.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
+// @ts-ignore
+import domtoimage from 'dom-to-image';
+// @ts-ignore
+import { saveAs } from 'file-saver';
 
 interface IProps {
   state: IInitialState;
@@ -23,22 +26,17 @@ export const PageSettingImage: React.FC<IProps> = ({state, dispatch}) => {
       // @ts-ignore
       svgText.innerHTML = studentArray[i];
 
-      if(i === studentArray.length -1){
+      if (i === studentArray.length) {
         alert('Скачивание завершено')
       }
 
       // @ts-ignore
-      await html2canvas(svg, {width: state.widthImage, height: state.heightImage, x: 0}).then(function (canvas) {
-
-        const link = document.createElement("a");
-        document.body.appendChild(link);
+      await domtoimage.toBlob(svg)
         // @ts-ignore
-        link.download = svgText.innerHTML + ".png";
-        link.href = canvas.toDataURL();
-        link.target = '_blank';
-        link.click();
-        document.body.removeChild(link);
-      });
+        .then(function (blob) {
+          // @ts-ignore
+          saveAs(blob, svgText.innerHTML + '.png');
+        });
     }
   }
   const [hideWindows, setHideWindows] = useState(false)
@@ -54,7 +52,7 @@ export const PageSettingImage: React.FC<IProps> = ({state, dispatch}) => {
       <div
         className={styles.containerWindowsParent}
       >
-        {hideWindows?(null):(
+        {hideWindows ? (null) : (
           <WindowsSetting
             state={state}
             dispatch={dispatch}
