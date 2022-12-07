@@ -16,11 +16,14 @@ interface IProps {
 
 export const PageSettingImage: React.FC<IProps> = ({state, dispatch}) => {
 
-  const student = ',' + state.text;
+  const student = state.text;
   const studentArray = student.split(',');
+  const [hideWindows, setHideWindows] = useState(false)
 
   const downloadFile = async () => {
+
     for (let i = 0; i < studentArray.length; i++) {
+
       const svg = document.getElementById("svg_image");
       const svgText = document.getElementById("svg_text");
       // @ts-ignore
@@ -29,7 +32,6 @@ export const PageSettingImage: React.FC<IProps> = ({state, dispatch}) => {
       if (i === studentArray.length) {
         alert('Скачивание завершено')
       }
-
       // @ts-ignore
       await domtoimage.toBlob(svg)
         // @ts-ignore
@@ -39,7 +41,6 @@ export const PageSettingImage: React.FC<IProps> = ({state, dispatch}) => {
         });
     }
   }
-  const [hideWindows, setHideWindows] = useState(false)
 
   const handlerHideButton = () => {
     setHideWindows(!hideWindows)
