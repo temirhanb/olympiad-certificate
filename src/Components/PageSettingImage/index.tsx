@@ -97,7 +97,7 @@ export const PageSettingImage: React.FC<IProps> = ({state, dispatch}) => {
               fontFamily: state.fontFamily,
             }}
           >
-            {studentArray[1]}
+            {studentArray[0]}
           </div>
         </div>
       </div>
