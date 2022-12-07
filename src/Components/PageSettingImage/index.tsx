@@ -93,6 +93,7 @@ export const PageSettingImage: React.FC<IProps> = ({state, dispatch}) => {
             style={{
               color: `#${state.color}`,
               fontSize: `${state.fontSize}px`,
+              fontFamily: state.fontFamily,
             }}
           >
             {studentArray[1]}

@@ -12,6 +12,41 @@ code {
   monospace;
 }
 
+@font-face {
+  font-family: 'CirceRoundedRegular2';
+  src: local('CirceRoundedRegular2'), url(./fonts/circle/CirceRoundedAlt-Regular2.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'CirceRoundedRegular';
+  src: local('CirceRoundedRegular'), url(./fonts/circle/CirceRoundedRegular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'CirceRoundedBold';
+  src: local('CirceRoundedBold'), url(./fonts/circle/CirceRoundedAltBold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'UbuntuMedium';
+  src: local('UbuntuMedium'), url(./fonts/ubuntu/Ubuntu-M.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'UbuntuBold';
+  src: local('UbuntuBold'), url(./fonts/ubuntu/Ubuntu-B.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'UbuntuRegular';
+  src: local('UbuntuRegular'), url(./fonts/ubuntu/Ubuntu-R.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'UbuntuLite';
+  src: local('UbuntuLite'), url(./fonts/ubuntu/Ubuntu-L.ttf) format('truetype');
+}
+
 .container {
   display: flex;
   justify-content: center;
@@ -170,6 +205,15 @@ code {
   min-height: 5vh;
   font-size: large;
 }
+
+
+.inputSelect {
+  width: 100%;
+  height: auto;
+  min-height: 5vh;
+  font-size: large;
+}
+
 
 .inputFile {
   display: none;

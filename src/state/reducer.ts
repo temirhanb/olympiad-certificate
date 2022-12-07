@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  EDIT_DRAG_IMAGE,
+  EDIT_DRAG_IMAGE, EDIT_FONT_FAMILY,
   EDIT_TEXTAREA_FIELD,
   EDIT_WINDOWS_SHOWING,
   IInitialState,
@@ -16,6 +16,7 @@ export const initialState: IInitialState = {
   window: false,
   image: '',
   color: '000',
+  fontFamily: '',
   drag: false,
   widthImage: 0,
   leftText: 30,
@@ -37,6 +38,8 @@ export const reducer: React.Reducer<IInitialState, any> = (state, action) => {
       return {...state, text: action.payload};
     case IMAGE_ONLOAD:
       return {...state, image: action.payload};
+    case EDIT_FONT_FAMILY:
+      return {...state, fontFamily: action.payload};
     case SET_COLOR_TEXT:
       return {...state, color: action.payload};
     case SET_TOP_TEXT:
