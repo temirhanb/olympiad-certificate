@@ -22,6 +22,8 @@ export const PageSettingImage: React.FC<IProps> = ({state, dispatch}) => {
 
   const downloadFile = async () => {
 
+    setHideWindows(true)
+
     for (let i = 0; i < studentArray.length; i++) {
 
       const svg = document.getElementById("svg_image");
@@ -42,10 +44,6 @@ export const PageSettingImage: React.FC<IProps> = ({state, dispatch}) => {
     }
   }
 
-  const handlerHideButton = () => {
-    setHideWindows(!hideWindows)
-  }
-
   return (
     <div
       style={{position: 'absolute', left: 0, top: 0}}
@@ -53,17 +51,15 @@ export const PageSettingImage: React.FC<IProps> = ({state, dispatch}) => {
       <div
         className={styles.containerWindowsParent}
       >
-        {hideWindows ? (null) : (
+        {hideWindows ? (
+          <div className={styles.loader}>loading</div>
+        ) : (
           <WindowsSetting
             state={state}
             dispatch={dispatch}
             downloadFile={downloadFile}
           />
         )}
-
-        <div onClick={handlerHideButton} className={styles.hideWindows}>
-          <FontAwesomeIcon icon={faArrowDown}/>
-        </div>
       </div>
 
       <div

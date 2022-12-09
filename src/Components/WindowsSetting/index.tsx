@@ -53,7 +53,6 @@ export const WindowsSetting: React.FC<IProps> = (
     downloadFile
   }) => {
 
-  const [preloader, setPreloader] = useState(false)
   const handlerInputLeft = (e: any) => {
     e.preventDefault();
     return dispatch({type: SET_LEFT_TEXT, payload: Number(e.target.value)})
@@ -75,7 +74,8 @@ export const WindowsSetting: React.FC<IProps> = (
   }
 
   const handlerStartDownload = async () => {
-    setPreloader(true)
+    const stateToString = JSON.stringify(state)
+    localStorage.setItem('data', stateToString);
 
     downloadFile();
   }
@@ -113,13 +113,9 @@ export const WindowsSetting: React.FC<IProps> = (
         <span>Цвет текста</span>
         <input className={styles.inputSetting} value={state.color} onChange={handlerInputColor} type="sting"/>
       </div>
-      {preloader ? (
-        <div className={styles.loader}>loading</div>
-      ) : (
-        <div>
-          <button onClick={handlerStartDownload}>Скачать</button>
-        </div>
-      )}
+      <div>
+        <button onClick={handlerStartDownload}>Скачать</button>
+      </div>
     </div>
   )
 }

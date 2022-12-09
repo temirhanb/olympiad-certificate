@@ -7,6 +7,7 @@ export const SET_IMAGE_SIZE = 'SET_IMAGE_SIZE'
 export const SET_LEFT_TEXT = 'SET_LEFT_TEXT'
 export const SET_TOP_TEXT = 'SET_TOP_TEXT'
 export const SET_TEXT_SIZE = 'SET_TEXT_SIZE'
+export const SET_STATE = 'SET_STATE'
 export const SET_COLOR_TEXT = 'SET_COLOR_TEXT'
 
 export interface IInitialState {

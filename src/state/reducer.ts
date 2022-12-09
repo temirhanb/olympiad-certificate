@@ -7,7 +7,7 @@ import {
   IMAGE_ONLOAD,
   SET_COLOR_TEXT,
   SET_IMAGE_SIZE,
-  SET_LEFT_TEXT,
+  SET_LEFT_TEXT, SET_STATE,
   SET_TEXT_SIZE,
   SET_TOP_TEXT
 } from "./types";
@@ -30,6 +30,31 @@ export const initialState: IInitialState = {
 export const reducer: React.Reducer<IInitialState, any> = (state, action) => {
 
   switch (action.type) {
+    case SET_STATE:
+      const {
+        window,
+        color,
+        fontFamily,
+        drag,
+        widthImage,
+        leftText,
+        topText,
+        fontSize,
+        heightImage,
+        text
+      } = action.payload
+      return {...state,
+        window,
+        color,
+        fontFamily,
+        drag,
+        widthImage,
+        leftText,
+        topText,
+        fontSize,
+        heightImage,
+        text
+      };
     case EDIT_WINDOWS_SHOWING:
       return {...state, window: action.payload};
     case EDIT_DRAG_IMAGE:
