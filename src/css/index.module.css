@@ -12,6 +12,41 @@ code {
   monospace;
 }
 
+@font-face {
+  font-family: 'CirceRoundedRegular2';
+  src: local('CirceRoundedRegular2'), url(./fonts/circle/CirceRoundedAlt-Regular2.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'CirceRoundedRegular';
+  src: local('CirceRoundedRegular'), url(./fonts/circle/CirceRoundedRegular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'CirceRoundedBold';
+  src: local('CirceRoundedBold'), url(./fonts/circle/CirceRoundedAltBold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'UbuntuMedium';
+  src: local('UbuntuMedium'), url(./fonts/ubuntu/Ubuntu-M.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'UbuntuBold';
+  src: local('UbuntuBold'), url(./fonts/ubuntu/Ubuntu-B.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'UbuntuRegular';
+  src: local('UbuntuRegular'), url(./fonts/ubuntu/Ubuntu-R.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'UbuntuLite';
+  src: local('UbuntuLite'), url(./fonts/ubuntu/Ubuntu-L.ttf) format('truetype');
+}
+
 .container {
   display: flex;
   justify-content: center;
@@ -140,16 +175,10 @@ code {
 .containerWindowsSetting {
   display: flex;
   flex-direction: column;
-  width: 30%;
-  height: auto;
+  width: 100%;
+  height: 100%;
   z-index: 100;
-  position: fixed;
-  left: 5%;
-  top: 5%;
-  background: white;
   align-items: center;
-  border-radius: 20px;
-  padding: 20px 0;
 }
 
 .windowsSettingHeader {
@@ -174,9 +203,116 @@ code {
   width: 100%;
   height: auto;
   min-height: 5vh;
-  font-size:large;
+  font-size: large;
 }
 
-.inputFile{
+
+.inputSelect {
+  width: 100%;
+  height: auto;
+  min-height: 5vh;
+  font-size: large;
+}
+
+
+.inputFile {
   display: none;
+}
+
+.loader {
+  overflow: hidden;
+  font-size: 10px;
+  margin: 50px auto;
+  text-indent: -9999em;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #65abf8;
+  background: -moz-linear-gradient(left, #65abf8 10%, rgba(101, 171, 248, 0) 42%);
+  background: -webkit-linear-gradient(left, #65abf8 10%, rgba(101, 171, 248, 0) 42%);
+  background: -o-linear-gradient(left, #65abf8 10%, rgba(101, 171, 248, 0) 42%);
+  background: -ms-linear-gradient(left, #65abf8 10%, rgba(101, 171, 248, 0) 42%);
+  background: linear-gradient(to right, #65abf8 10%, rgba(101, 171, 248, 0) 42%);
+  position: relative;
+  -webkit-animation: load3 1.4s infinite linear;
+  animation: load3 1.4s infinite linear;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+.loader:before {
+  width: 50%;
+  height: 50%;
+  background: #65abf8;
+  border-radius: 100% 0 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+}
+
+.loader:after {
+  background: white;
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+  content: '';
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+@-webkit-keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.hideWindows {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0;
+  left: 50%;
+  z-index: 101;
+  width: 100%;
+  height: 10%;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.containerWindowsParent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 5%;
+  top: 5%;
+  width: 18%;
+  flex-direction: column;
+  height: auto;
+  z-index: 100;
+  background: white;
+  border-radius: 20px;
+  padding: 20px 0;
 }

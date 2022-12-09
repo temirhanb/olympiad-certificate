@@ -1,6 +1,7 @@
 export const EDIT_WINDOWS_SHOWING = 'EDIT_WINDOWS_SHOWING'
 export const EDIT_TEXTAREA_FIELD = 'EDIT_TEXTAREA_FIELD'
 export const EDIT_DRAG_IMAGE = 'EDIT_DRAG_IMAGE'
+export const EDIT_FONT_FAMILY = 'EDIT_FONT_FAMILY'
 export const IMAGE_ONLOAD = 'IMAGE_ONLOAD'
 export const SET_IMAGE_SIZE = 'SET_IMAGE_SIZE'
 export const SET_LEFT_TEXT = 'SET_LEFT_TEXT'
@@ -12,6 +13,7 @@ export interface IInitialState {
   window: boolean;
   image: string;
   text: string;
+  fontFamily: string;
   color: string;
   drag: boolean;
   widthImage: number;

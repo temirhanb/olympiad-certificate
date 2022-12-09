@@ -1,7 +1,13 @@
-import React from "react";
-import html2canvas from "html2canvas";
+import React, { useState } from "react";
 import { IInitialState } from "../../state/types";
 import { WindowsSetting } from "../WindowsSetting";
+import styles from "../../css/index.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
+// @ts-ignore
+import domtoimage from 'dom-to-image';
+// @ts-ignore
+import { saveAs } from 'file-saver';
 
 interface IProps {
   state: IInitialState;
@@ -9,49 +15,56 @@ interface IProps {
 }
 
 export const PageSettingImage: React.FC<IProps> = ({state, dispatch}) => {
-  const student = ',' + state.text;
-  let interval:any = null;
 
-  const clearIntervals = (interval:any)=>{
-    clearInterval(interval)
-  }
+  const student = ',' + state.text;
   const studentArray = student.split(',');
-  const downloadFile = () => {
-    let i = 0;
-    const download = () => {
+
+  const downloadFile = async () => {
+    for (let i = 0; i < studentArray.length; i++) {
       const svg = document.getElementById("svg_image");
       const svgText = document.getElementById("svg_text");
-      if (i === studentArray.length) {
-        clearIntervals(interval)
-      }
       // @ts-ignore
       svgText.innerHTML = studentArray[i];
-      console.log('download')
-      // @ts-ignore
-      html2canvas(svg, {width: state.widthImage, height: state.heightImage, x: 0}).then(function (canvas) {
 
-        const link = document.createElement("a");
-        document.body.appendChild(link);
+      if (i === studentArray.length) {
+        alert('Скачивание завершено')
+      }
+
+      // @ts-ignore
+      await domtoimage.toBlob(svg)
         // @ts-ignore
-        link.download = svgText.innerHTML + ".png";
-        link.href = canvas.toDataURL();
-        link.target = '_blank';
-        link.click();
-        document.body.removeChild(link);
-        i++
-      });
+        .then(function (blob) {
+          // @ts-ignore
+          saveAs(blob, svgText.innerHTML + '.png');
+        });
     }
-    interval = setInterval(download, 5000);
   }
+  const [hideWindows, setHideWindows] = useState(false)
+
+  const handlerHideButton = () => {
+    setHideWindows(!hideWindows)
+  }
+
   return (
     <div
       style={{position: 'absolute', left: 0, top: 0}}
     >
-      <WindowsSetting
-        state={state}
-        dispatch={dispatch}
-        downloadFile={downloadFile}
-      />
+      <div
+        className={styles.containerWindowsParent}
+      >
+        {hideWindows ? (null) : (
+          <WindowsSetting
+            state={state}
+            dispatch={dispatch}
+            downloadFile={downloadFile}
+          />
+        )}
+
+        <div onClick={handlerHideButton} className={styles.hideWindows}>
+          <FontAwesomeIcon icon={faArrowDown}/>
+        </div>
+      </div>
+
       <div
         style={{width: state.widthImage, height: state.heightImage, position: 'absolute'}}
         id="svg_image"
@@ -67,7 +80,7 @@ export const PageSettingImage: React.FC<IProps> = ({state, dispatch}) => {
         <div
           id="container_text"
           style={{
-            width: 100,
+            width: 'auto',
             left: `${state.leftText}%`,
             top: `${state.topText}%`,
             display: "flex",
@@ -80,6 +93,7 @@ export const PageSettingImage: React.FC<IProps> = ({state, dispatch}) => {
             style={{
               color: `#${state.color}`,
               fontSize: `${state.fontSize}px`,
+              fontFamily: state.fontFamily,
             }}
           >
             {studentArray[1]}
